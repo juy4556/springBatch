@@ -19,9 +19,9 @@ public class StockPrice extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stock_id")
     private Stock stock;
-    private Float price;
+    private Long price;
 
-    public StockPrice(Stock stock, Float price) {
+    public StockPrice(Stock stock, Long price) {
         super(StatusType.ACTIVATE.getStatus());
         this.stock = stock;
         this.price = price;
