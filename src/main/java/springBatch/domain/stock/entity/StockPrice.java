@@ -21,9 +21,8 @@ public class StockPrice extends BaseEntity {
     private Stock stock;
     private Float price;
 
-    public StockPrice(Long id, Stock stock, Float price) {
+    public StockPrice(Stock stock, Float price) {
         super(StatusType.ACTIVATE.getStatus());
-        this.id = id;
         this.stock = stock;
         this.price = price;
         stock.getStockPrices().add(this);

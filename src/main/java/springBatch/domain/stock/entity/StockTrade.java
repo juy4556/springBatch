@@ -31,9 +31,8 @@ public class StockTrade extends BaseEntity {
     private Long averagePrice;
     private StockTradeType type;
 
-    public StockTrade(Long id, Account account, Stock stock, Long amount, Long averagePrice, StockTradeType type) {
+    public StockTrade(Account account, Stock stock, Long amount, Long averagePrice, StockTradeType type) {
         super(StatusType.ACTIVATE.getStatus());
-        this.id = id;
         this.account = account;
         this.stock = stock;
         this.amount = amount;

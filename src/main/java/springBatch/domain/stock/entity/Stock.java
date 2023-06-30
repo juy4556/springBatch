@@ -24,9 +24,8 @@ public class Stock extends BaseEntity {
     @OneToMany(mappedBy = "stock")
     private final List<StockPrice> stockPrices = new ArrayList<>();
 
-    public Stock(Long id, String name) {
+    public Stock(String name) {
         super(StatusType.ACTIVATE.getStatus());
-        this.id = id;
         this.name = name;
     }
 }
