@@ -20,10 +20,14 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String birth;
 
-    public User(String name, String birth) {
+    @Column(nullable = false)
+    private String password;
+
+    public User(String name, String birth, String password) {
         super("ACTIVE");
         this.name = name;
         this.birth = birth;
+        this.password = password;
     }
 
 }
