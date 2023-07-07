@@ -1,7 +1,7 @@
 package springbatch.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springbatch.domain.user.dto.request.SignupRequest;
@@ -13,16 +13,15 @@ import springbatch.domain.user.repository.UserRepository;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
 
     @Transactional
     public SignupResponse signUp(SignupRequest request) {
-        String password = request.getPassword();
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = bCryptPasswordEncoder.encode(password);
-        User user = new User(request.getName(), request.getBirth(), encodedPassword);
+        log.info("실행됨?");
+        User user = new User(request.getName(), request.getBirth(), request.getPassword());
         userRepository.save(user);
         return new SignupResponse(user.getId(), user.getName());
     }
