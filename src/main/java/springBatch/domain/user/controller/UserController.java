@@ -22,6 +22,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<SignupResponse> register(@RequestBody @Valid final SignupRequest request) {
+        log.info("여기도안와??");
         SignupResponse signupResponse = userService.signUp(request);
         return ResponseEntity.ok().body(signupResponse);
     }
