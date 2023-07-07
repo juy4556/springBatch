@@ -20,7 +20,6 @@ public class UserService {
 
     @Transactional
     public SignupResponse signUp(SignupRequest request) {
-        log.info("실행됨?");
         User user = new User(request.getName(), request.getBirth(), request.getPassword());
         userRepository.save(user);
         return new SignupResponse(user.getId(), user.getName());
