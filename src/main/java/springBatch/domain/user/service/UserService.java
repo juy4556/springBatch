@@ -40,4 +40,19 @@ public class UserService {
         userRepository.save(user);
         return new SignupResponse(user.getId(), user.getName());
     }
+
+    @Transactional
+    public LoginResponse login(LoginRequest request) {
+        String name = request.getName();
+        String password = request.getPassword();
+        User user = userRepository.findByName(name).orElseThrow();
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(name, password));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String accessToken = jwtUtils.generateJwtToken(user);
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(accessToken);
+        return new LoginResponse(user.getName(), accessToken,
+                refreshToken.getId(), refreshToken.getCreatedAt());
+    }
 }
