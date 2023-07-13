@@ -16,3 +16,10 @@ spring:
         formal_sql: true
         show_sql: true
     open-in-view: false
+
+security:
+  jwt:
+    token:
+      secretKey: ${JWT_KEY}
+      expirationMs: ${JWT_EXPIRY}
+      refreshExpirationMs: ${REFRESH_EXPIRY}
