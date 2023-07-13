@@ -14,12 +14,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springbatch.domain.security.jwt.AuthEntryPointJwt;
 import springbatch.domain.security.jwt.AuthTokenFilter;
+import springbatch.domain.security.jwt.JwtAuthArgumentResolver;
 import springbatch.domain.security.jwt.JwtUtils;
 import springbatch.domain.security.service.UserDetailsServiceImpl;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Configuration
@@ -29,7 +33,12 @@ public class WebConfig implements WebMvcConfigurer {
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthEntryPointJwt unauthorizedHandler;
     private final JwtUtils jwtUtils;
+    private final JwtAuthArgumentResolver jwtAuthArgumentResolver;
 
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(jwtAuthArgumentResolver);
+    }
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
